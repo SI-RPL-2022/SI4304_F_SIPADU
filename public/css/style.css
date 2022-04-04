@@ -1,0 +1,129 @@
+@font-face {
+    font-family: 'Sofia Sans';
+    src: url('../fonts/SofiaSans-Regular.woff2') format('woff2'),
+        url('../fonts/SofiaSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'Sofia Sans';
+    /* font-weight: 900; */
+    background-color: #F7F8FA;
+}
+
+.bg-sawah {
+    background-image: url('../images/latar-sawah.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 900px
+
+}
+
+.text-primary-2 {
+    color: #395578;
+}
+
+.bg-primary-2 {
+    background-color: #395578;
+}
+
+.btn-primary-2 {
+    background-color: #5176A3;
+    color: white;
+    font-weight: 100;
+    padding: 0.4rem 2rem;
+    border-radius: 40px
+}
+
+.btn-primary-2:hover {
+    background-color: #395578;
+    color: white;
+    font-weight: 100;
+    padding: 0.4rem 2rem;
+    border-radius: 40px
+}
+
+.btn-danger-2 {
+    background-color: #CD5B5B;
+    color: white;
+    font-weight: 100;
+    padding: 0.4rem 2rem;
+    border-radius: 40px
+}
+
+.btn-danger-2:hover {
+    background-color: #CD5B6D;
+    color: white;
+    font-weight: 100;
+    padding: 0.4rem 2rem;
+    border-radius: 40px
+}
+
+.btn-warning-2 {
+    background-color: #FFE79F;
+    color: #395578;
+    font-weight: 100;
+    padding: 0.4rem 2rem;
+    border-radius: 40px
+}
+
+.btn-warning-2:hover {
+    background-color: #FFE77F;
+    color: #395578;
+    font-weight: 100;
+    padding: 0.4rem 2rem;
+    border-radius: 40px
+}
+
+
+.shadow-btn {
+    filter: drop-shadow(-1px 6px 16px rgba(205, 103, 149, 0.4))
+}
+
+.title-news {
+    content: '',
+    display: block;
+    height: auto;
+    width: 180px;
+    border-bottom: 7px solid #FFE69E
+}
+
+/* .card-register {
+    
+} */
+
+.card-register {
+    width: 50%
+}
+
+.scrollbar
+{
+	overflow-y: scroll;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #C4C4C4;
+}
+
+.scrollbar-custom::-webkit-scrollbar
+{
+	/* width: 15px; */
+	background-color: #C4C4C4;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb
+{
+	background-color: #E6E6E6;	
+}
+
+@media (max-width: 768px) {
+    .card-register {
+        width: 100%
+    }
+}

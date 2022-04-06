@@ -30,3 +30,6 @@ Route::get('/register/berhasil', function () {
 });
 
 Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('profil', [HomeController::class, 'profil'])->name('profil');

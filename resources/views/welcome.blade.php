@@ -35,7 +35,7 @@
                                 Silahkan login untuk melakukan pengaduan layanan masyarakat
                             </p>
                         </div>
-                        <a href="#" class="btn btn-primary-2 shadow-btn mt-5">Masuk</a>
+                        <a href="{{ route('login') }}" class="btn btn-primary-2 shadow-btn mt-5">Masuk</a>
                         <div class="text-center mt-3">
                             <span class="text-primary-2" style="font-weight: 100">Belum memiliki akun?</span> <a
                                 href="#" style="font-weight: 100; opacity: 0.5;">Daftar

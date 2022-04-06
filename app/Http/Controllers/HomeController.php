@@ -33,4 +33,15 @@ class HomeController extends Controller
 
         return view('home', $data);
     }
+
+    public function profil(Request $request)
+    {
+        
+        $user = User::find(Auth::user()->id);
+
+        $data = [
+            'title' => 'Profil',
+            'user' => $user
+        ];
+    }
 }

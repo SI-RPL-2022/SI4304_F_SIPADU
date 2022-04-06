@@ -10,13 +10,13 @@
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}">
-    <title>SIPADU</title>
+    <title>{{ $title }} | SIPADU</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('images/logo.svg') }}" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse d-md-flex justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item pe-3">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item pe-3">
                         <a class="nav-link active" href="#">Lapor Keluhan</a>
@@ -40,7 +40,7 @@
                             Profil
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Profil</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profil') }}">Profil</a></li>
                             <li><a class="dropdown-item logoutButton" href="#">Logout</a></li>
                         </ul>
                     </li>
@@ -48,7 +48,7 @@
             </div>
         </div>
     </nav>
-    <form action="#" method="POST" id="logoutForm" class="d-none">
+    <form action="{{ route('logout') }}" method="POST" id="logoutForm" class="d-none">
         @csrf
     </form>
     <div class="mt-5">

@@ -9,39 +9,26 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
-    <title>Landing Page | SIPADU</title>
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+    <title>Pendaftaran Berhasil | SIPADU</title>
 </head>
 
-<body>
+<body class="bg-sawah">
     <nav class="navbar navbar-light bg-white">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="./images/logo.svg" alt="">
+                <img src="{{ asset('/images/logo.svg') }}" alt="">
             </a>
         </div>
     </nav>
-    <div class="landing-page my-5">
+    <div class="mt-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-7">
-                    <img src="./images/world.svg" width="100%" alt="">
-                </div>
-                <div class="col-md-5 mt-5 pt-5">
-                    <div class="text-center ps-md-5">
-                        <h1 class="text-primary-2" style="font-weight: bolder;">Selamat Datang!</h1>
-                        <div class="mt-4 text-md-start text-center w-75 mx-auto ps-md-4">
-                            <p class="text-primary-2" style="font-weight: 100;">
-                                Silahkan login untuk melakukan pengaduan layanan masyarakat
-                            </p>
-                        </div>
-                        <a href="{{ route('login') }}" class="btn btn-primary-2 shadow-btn mt-5">Masuk</a>
-                        <div class="text-center mt-3">
-                            <span class="text-primary-2" style="font-weight: 100">Belum memiliki akun?</span> <a
-                                href="{{ route('register') }}" style="font-weight: 100; opacity: 0.5;">Daftar
-                                disini</a>
-                        </div>
-                    </div>
+            <div class="card py-5 card-register mx-auto">
+                <div class="text-center text-primary-2">
+                    <h2>Pendaftaran Berhasil</h2>
+                    <img src="{{ asset('/images/check_1.png') }}" class="py-5">
+                    <h6>Silahkan Masuk</h6>
+                    <a href="{{ route('login') }}" class="btn btn-primary-2 mt-3">Masuk</a>
                 </div>
             </div>
         </div>

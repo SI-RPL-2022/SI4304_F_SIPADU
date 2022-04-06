@@ -25,4 +25,8 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('/register/berhasil', function () {
+    return view('auth.register_berhasil');
+});
+
 Auth::routes();

@@ -29,7 +29,12 @@ Route::get('/register/berhasil', function () {
     return view('auth.register_berhasil');
 });
 
+
+// auth
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('profil', [HomeController::class, 'profil'])->name('profil');
+
+// Laporan
+Route::get('keluhan', [LaporanController::class, 'index'])->name('lapor.keluhan');

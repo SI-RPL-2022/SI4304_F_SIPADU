@@ -47,5 +47,37 @@ class LaporanController extends Controller
             return abort(404);
         }
     }
-}
  
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $laporan = Laporan::create([
+                'id_user' => Auth::user()->id,
+                'no_referensi' => rand(10000, 999999),
+                'fasilitas' => $request->fasilitas,
+                'lokasi' => $request->lokasi,
+                'keluhan' => $request->keluhan,
+                'tipe' => $request->tipe,
+                'status' => 0,
+            ]);
+ 
+            DB::commit();
+ 
+            $request->session()->flash('alert', 'success');
+            $request->session()->flash('message', 'Laporan Berhasil Ditambahkan!');
+            if ($request->tipe == 1) {
+                return redirect()->to(route('lapor.keluhan.upload.fasilitas.rusak', ['id' => $laporan->id]));
+            }
+            return redirect()->to(route('lapor.keluhan'));
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+}

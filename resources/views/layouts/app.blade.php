@@ -29,7 +29,7 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item pe-3">
-                        <a class="nav-link active" href="#">Lapor Keluhan</a>
+                        <a class="nav-link active" href="{{ route('laporkeluhan') }}">Lapor Keluhan</a>
                     </li>
                     <li class="nav-item pe-3">
                         <a class="nav-link active" href="#">Status Laporan</a>

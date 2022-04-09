@@ -37,4 +37,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('profil', [HomeController::class, 'profil'])->name('profil');
 
 // Laporan
-Route::get('keluhan', [LaporanController::class, 'index'])->name('lapor.keluhan');
+Route::get('keluhan', [LaporanController::class, 'index'])->name('laporkeluhan');

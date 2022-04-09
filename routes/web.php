@@ -37,4 +37,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('profil', [HomeController::class, 'profil'])->name('profil');
 
 // Laporan
-Route::get('keluhan', [LaporanController::class, 'index'])->name('laporkeluhan');
+Route::prefix('lapor')->group(function () {
+    Route::get('keluhan', [LaporanController::class, 'index'])->name('lapor.keluhan');
+    Route::get('keluhan/{type}', [LaporanController::class, 'laporKeluhan'])->name('lapor.keluhan.type');
+    Route::get('keluhan/{type}/{id}/upload', [LaporanController::class, 'laporKeluhan'])->name('lapor.keluhan.type');
+    Route::post('keluhan/fasilitas-rusak/{id}/upload', [LaporanController::class, 'uploadFasilitasRusak'])->name('lapor.keluhan.upload.fasilitas.rusak');
+    Route::get('keluhan/fasilitas-rusak/done', function () {
+        $data['title'] = 'Laporan Fasilitas Rusak';
+        return view('laporan.lapor_fasilitas_rusak_done', $data);
+    })->name('lapor.keluhan.fasilitas.rusak.done');
+    Route::post('keluhan/save}', [LaporanController::class, 'store'])->name('lapor.keluhan.save');
+});

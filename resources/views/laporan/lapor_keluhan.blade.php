@@ -13,7 +13,12 @@
                     Menemukan Fasilitas Publik yang rusak?, Atau ingin Melaporkan Oknum?, Atau hanya sekadar ingin
                     memberi saran? Yuk isi sekarang
                 </p>
-                work in progress
+                <div class="d-flex justify-content-around mt-5 px-3">
+                    <a href="{{ url('lapor/keluhan/fasilitas-rusak') }}"
+                        class="btn btn-primary-2 mx-2 shadow-btn py-4">Lapor Fasilitas Rusak</a>
+                    <button class="btn btn-primary-2 mx-2 shadow-btn py-4">Lapor Oknum</button>
+                    <button class="btn btn-primary-2 mx-2 shadow-btn py-4">Keluhan/Saran Terkait Fasilitas</button>
+                </div>
             </div>
         </div>
     </div>

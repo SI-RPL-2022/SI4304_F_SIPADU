@@ -80,4 +80,31 @@ class LaporanController extends Controller
             throw $e;
         }
     }
+ 
+    public function uploadFasilitasRusak(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            if ($request->hasFile('file')) {
+                $format = $request->file('file')->getClientOriginalName();
+                $name = Str::random(7);
+                $newName = 'fasilitas_rusak_' . $name . $format;
+                $request->file('file')->move(public_path() . '/keluhan', $newName);
+ 
+                $laporan = Laporan::find($id);
+                $laporan->file = $newName;
+                $laporan->save();
+            } else {
+                $request->session()->flash('alert', 'warning');
+                $request->session()->flash('message', 'Harap Upload File Terlebih Dahulu!');
+                return redirect()->back();
+            }
+            $request->session()->flash('noRef', $laporan->no_referensi);
+            DB::commit();
+ 
+            return redirect()->to(route('lapor.keluhan.fasilitas.rusak.done'));
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
 }

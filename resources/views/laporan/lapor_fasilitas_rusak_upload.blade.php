@@ -4,7 +4,7 @@
         <div class="text-center">
             <h2 class="text-primary-2 mb-4"><b>Laporkan Fasilitas Yang Rusak</b></h2>
         </div>
-        <form action="#" method="post"
+        <form action="{{ route('lapor.keluhan.upload.fasilitas.rusak', ['id' => $laporan->id]) }}" method="post"
             enctype="multipart/form-data">
             @csrf
             {{-- TIPE FASILITAS RUSAK --}}
@@ -25,7 +25,22 @@
                             <h3 class="text-primary-2">
                                 <b>Silahkan Upload Evidence mengenai laporan anda</b>
                             </h3>
-                           WIP
+                            <div class="card border-0 rounded mt-3 p-3 "
+                                style="box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                                <div class="row row-cols-3">
+                                    <div class="col-2">
+                                        <img src="{{ asset('images/upload.svg') }}" width="44px" height="36px" alt="">
+                                    </div>
+                                    <div class="col-6 text-start ps-0">
+                                        <h6 class="text-nowrap mb-0 pb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad ut esse veniam aperiam vero numquam, alias officia modi.</h6>
+                                        <span class="text-muted text-nowrap mt-0 pt-0" style="font-size: 12px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos repudiandae nobis </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-outline-info selectFile">PILIH FILE</button>
+                                        <input class="form-control d-none" name="file" type="file" id="formFile">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

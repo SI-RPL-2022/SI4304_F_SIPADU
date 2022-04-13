@@ -43,5 +43,8 @@ class HomeController extends Controller
             'title' => 'Profil',
             'user' => $user
         ];
+
+        return view('profil.index', $data);
+
     }
 }

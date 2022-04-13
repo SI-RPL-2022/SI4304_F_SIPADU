@@ -32,8 +32,8 @@
                                         <img src="{{ asset('images/upload.svg') }}" width="44px" height="36px" alt="">
                                     </div>
                                     <div class="col-6 text-start ps-0">
-                                        <h6 class="text-nowrap mb-0 pb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad ut esse veniam aperiam vero numquam, alias officia modi.</h6>
-                                        <span class="text-muted text-nowrap mt-0 pt-0" style="font-size: 12px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos repudiandae nobis </span>
+                                        <h6 class="text-nowrap mb-0 pb-0">Silahkan pilih file untuk di upload.</h6>
+                                        <span class="text-muted text-nowrap mt-0 pt-0" style="font-size: 12px;">JPG, PNG or MP4, ukuran file tidak lebih dari 10MB </span>
                                     </div>
                                     <div class="col-4">
                                         <button type="button" class="btn btn-outline-info selectFile">PILIH FILE</button>

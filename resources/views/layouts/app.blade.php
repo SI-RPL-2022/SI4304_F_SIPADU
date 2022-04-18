@@ -10,7 +10,7 @@
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}">
-    <title>{{ $title }} | SIPADU</title>
+    <title>SIPADU</title>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
                         <a class="nav-link active" href="{{ route('lapor.keluhan') }}">Lapor Keluhan</a>
                     </li>
                     <li class="nav-item pe-3">
-                        <a class="nav-link active" href="#">Status Laporan</a>
+                        <a class="nav-link active" href="{{ route('lapor.list') }}">Status Laporan</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"

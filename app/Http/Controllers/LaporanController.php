@@ -107,4 +107,16 @@ class LaporanController extends Controller
             throw $e;
         }
     }
+ 
+    public function daftarKeluhan()
+    {
+        $laporan = Laporan::orderBy('id', 'desc');
+ 
+        if (Auth::user()->role == 'user') {
+            $laporan->where('id_user', Auth::user()->id);
+        }
+ 
+        return view('laporan.daftar_laporan');
+    }
+    
 }

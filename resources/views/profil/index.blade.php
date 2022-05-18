@@ -51,7 +51,7 @@
                         <input type="password" class="form-control border-0" readonly value="{{ Auth::user()->password }}">
                     </div>
                     <div class="text-center mt-3">
-                        <a href="{{ route('profil.edit') }}" class="btn btn-primary-2">Ubah</a>
+                        <a href="#" class="btn btn-primary-2">Ubah</a>
                     </div>
                 </div>
             </div>

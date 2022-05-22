@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container pt-5">
+    <div class="container pt-5">
         @if (Session::has('alert'))
             <div class="alert alert-{{ Session::get('alert') }}" role="alert">
                 {{ Session::get('message') }}

@@ -16,4 +16,14 @@ class FasilitasController extends Controller
         ];
         return view('fasilitas.index', $data);
     }
+
+    public function show($id)
+    {
+        $fasilitas = Fasilitas::find($id);
+        $data = [
+            'title' => 'Fasilitas Publik Kelurahan Mengger',
+            'fasilitas' => $fasilitas
+        ];
+        return view('fasilitas.detail', $data);
+    }
 }

@@ -46,6 +46,36 @@ class LaporanController extends Controller
             }
 
             return view('laporan.lapor_fasilitas_rusak', $data);
+        } else if ($type == 'oknum') {
+            $data = [
+                'title' => 'Lapor Oknum Perusak Fasilitas'
+            ];
+
+            if ($id != null) {
+                $laporan = Laporan::find($id);
+                if ($laporan == null) abort(404);
+
+                $data['laporan'] = $laporan;
+
+                return view('laporan.oknum.lapor_oknum_upload', $data);
+            }
+
+            return view('laporan.oknum.lapor_oknum', $data);
+        } elseif ($type == 'saran') {
+            $data = [
+                'title' => 'Keluhan/Saran Terkait Fasilitas'
+            ];
+
+            if ($id != null) {
+                $laporan = Laporan::find($id);
+                if ($laporan == null) abort(404);
+
+                $data['laporan'] = $laporan;
+
+                return view('laporan.saran.lapor_saran_upload', $data);
+            }
+
+            return view('laporan.saran.lapor_saran', $data);
         } else {
             return abort(404);
         }
@@ -80,8 +110,28 @@ class LaporanController extends Controller
             $request->session()->flash('message', 'Laporan Berhasil Ditambahkan!');
             if ($request->tipe == 1) {
                 return redirect()->to(route('lapor.keluhan.upload.fasilitas.rusak', ['id' => $laporan->id]));
+            } else if ($request->tipe == 2) {
+                return redirect()->to(route('lapor.keluhan.upload.oknum', ['id' => $laporan->id]));
+            } else if ($request->tipe == 3) {
+                return redirect()->to(route('lapor.keluhan.upload.saran', ['id' => $laporan->id]));
             }
             return redirect()->to(route('lapor.keluhan'));
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+    public function feedback(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $feedback = new Feedback();
+            $feedback->id_laporan = $request->id_laporan;
+            $feedback->feedback = $request->feedback;
+            $feedback->pesan = $request->pesan;
+            $feedback->save();
+
+            DB::commit();
+            return redirect()->to(route('lapor.feedback.done'));
         } catch (\Exception $e) {
             throw $e;
         }

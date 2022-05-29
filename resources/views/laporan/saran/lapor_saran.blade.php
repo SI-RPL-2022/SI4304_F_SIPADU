@@ -55,3 +55,20 @@
 
                             </div>
                         </div>
+                        </div>
+                    <div class="d-flex justify-content-end mt-3">
+                        <button class="btn btn-primary-2 next-step">Selanjutnya</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        $('.next-page').on('click', function() {
+            $('#intro').addClass('d-none')
+            $('#form-1').removeClass('d-none')
+        })
+    </script>
+@endsection

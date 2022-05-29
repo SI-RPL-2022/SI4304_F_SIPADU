@@ -16,8 +16,10 @@
                 <div class="d-flex justify-content-around mt-5 px-3">
                     <a href="{{ url('lapor/keluhan/fasilitas-rusak') }}"
                         class="btn btn-primary-2 mx-2 shadow-btn py-4">Lapor Fasilitas Rusak</a>
-                    <button class="btn btn-primary-2 mx-2 shadow-btn py-4">Lapor Oknum</button>
-                    <button class="btn btn-primary-2 mx-2 shadow-btn py-4">Keluhan/Saran Terkait Fasilitas</button>
+                    <a href="{{ url('lapor/keluhan/oknum') }}" class="btn btn-primary-2 mx-2 shadow-btn py-4">Lapor
+                        Oknum</a>
+                    <a href="{{ url('lapor/keluhan/saran') }}" class="btn btn-primary-2 mx-2 shadow-btn py-4">Keluhan/Saran
+                        Terkait Fasilitas</a>
                 </div>
             </div>
         </div>

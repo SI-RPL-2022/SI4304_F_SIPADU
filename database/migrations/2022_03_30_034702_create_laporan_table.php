@@ -22,6 +22,9 @@ class CreateLaporanTable extends Migration
             $table->string('keluhan')->nullable();
             $table->string('file')->nullable();
             $table->integer('tipe')->nullable();
+            $table->date('tanggal_kejadian')->nullable();
+            $table->time('waktu_kejadian')->nullable();
+            $table->string('oknum')->nullable();
             $table->integer('status')->nullable();
             $table->text('alasan_penolakan')->nullable();
             $table->timestamps();

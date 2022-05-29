@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssignPetugas;
+use App\Models\Feedback;
 use App\Models\Laporan;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -108,6 +111,60 @@ class LaporanController extends Controller
         }
     }
 
+    public function uploadOknum(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            if ($request->hasFile('file')) {
+                $format = $request->file('file')->getClientOriginalName();
+                $name = Str::random(7);
+                $newName = 'oknum_' . $name . $format;
+                $request->file('file')->move(public_path() . '/keluhan', $newName);
+
+                $laporan = Laporan::find($id);
+                $laporan->file = $newName;
+                $laporan->save();
+            } else {
+                $request->session()->flash('alert', 'warning');
+                $request->session()->flash('message', 'Harap Upload File Terlebih Dahulu!');
+                return redirect()->back();
+            }
+            $request->session()->flash('noRef', $laporan->no_referensi);
+            DB::commit();
+
+            return redirect()->to(route('lapor.keluhan.oknum.done'));
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function uploadSaran(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            if ($request->hasFile('file')) {
+                $format = $request->file('file')->getClientOriginalName();
+                $name = Str::random(7);
+                $newName = 'saran_' . $name . $format;
+                $request->file('file')->move(public_path() . '/keluhan', $newName);
+
+                $laporan = Laporan::find($id);
+                $laporan->file = $newName;
+                $laporan->save();
+            } else {
+                $request->session()->flash('alert', 'warning');
+                $request->session()->flash('message', 'Harap Upload File Terlebih Dahulu!');
+                return redirect()->back();
+            }
+            $request->session()->flash('noRef', $laporan->no_referensi);
+            DB::commit();
+
+            return redirect()->to(route('lapor.keluhan.saran.done'));
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
     public function daftarKeluhan()
     {
         $laporan = Laporan::orderBy('id', 'desc');
@@ -146,8 +203,17 @@ class LaporanController extends Controller
             } else {
                 return view('laporan.form_penolakan', $data);
             }
+        } else if (isset($request->lapor) && $request->lapor == 'assign_petugas') {
+            $data['petugas'] = User::where('role', 'petugas')->get();
+            return view('laporan.assign_petugas', $data);
         }
         $lapor->save();
+
+        $assign = new AssignPetugas();
+        $assign->id_user = $request->petugas;
+        $assign->id_laporan = $id;
+        $assign->description = $request->description;
+        $assign->save();
 
         return view('laporan.lapor_berhasil', $data);
     }

@@ -15,7 +15,7 @@
                         {{ Session::get('message') }}
                     </div>
                 @endif
- 
+
                 <div class="card shadow-sm border-0 pt-3 pb-3" style="border-radius: 35px;">
                     <div class="card-body text-center">
                         <div class="border-bottom mx-4 pb-3">
@@ -32,11 +32,14 @@
                                         <img src="{{ asset('images/upload.svg') }}" width="44px" height="36px" alt="">
                                     </div>
                                     <div class="col-6 text-start ps-0">
-                                        <h6 class="text-nowrap mb-0 pb-0">Silahkan pilih file untuk di upload.</h6>
-                                        <span class="text-muted text-nowrap mt-0 pt-0" style="font-size: 12px;">JPG, PNG or MP4, ukuran file tidak lebih dari 10MB </span>
+                                        <h6 class="text-nowrap mb-0 pb-0">Select a file or drag and drop here</h6>
+                                        <span class="text-muted text-nowrap mt-0 pt-0" style="font-size: 12px;">JPG, PNG
+                                            or MP4, file size no
+                                            more than
+                                            10MB</span>
                                     </div>
                                     <div class="col-4">
-                                        <button type="button" class="btn btn-outline-info selectFile">PILIH FILE</button>
+                                        <button type="button" class="btn btn-outline-info selectFile">SELECT FILE</button>
                                         <input class="form-control d-none" name="file" type="file" id="formFile">
                                     </div>
                                 </div>

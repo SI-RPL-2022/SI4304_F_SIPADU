@@ -10,7 +10,7 @@
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}">
-    <title>SIPADU</title>
+    <title>{{ $title }} | SIPADU</title>
 </head>
 
 <body>
@@ -28,16 +28,31 @@
                     <li class="nav-item pe-3">
                         <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
-                    <li class="nav-item pe-3">
-                        <a class="nav-link active" href="{{ route('lapor.keluhan') }}">Lapor Keluhan</a>
-                    </li>
-                    <li class="nav-item pe-3">
-                        <a class="nav-link active" href="{{ route('lapor.list') }}">Status Laporan</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Informasi
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('fasilitas.index') }}">Infrastruktur
+                                    Publik</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ auth::user()->name }}
+                            Laporan
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('lapor.keluhan') }}">Lapor Keluhan</a></li>
+                            <li><a class="dropdown-item" href="{{ route('lapor.list') }}">Status Laporan</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('profil') }}">Profil</a></li>
@@ -58,8 +73,7 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.js') }}">
-    </script>
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script src="{{ asset('js/sweetalert.js') }}"></script>
     <script type="text/javascript">
         $('.logoutButton').on('click', function() {

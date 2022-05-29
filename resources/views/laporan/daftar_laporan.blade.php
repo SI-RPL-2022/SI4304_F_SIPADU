@@ -33,28 +33,32 @@ use App\Models\Laporan;
                                 </tr>
                             </thead>
                             <tbody class="text-primary-2 body-laporan">
-                                    <tr id="#" class="row-laporan border-bottom">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                @foreach ($laporan as $index => $row)
+                                    <tr id="{{ $row->no_referensi }}" class="row-laporan border-bottom">
+                                        <td>{{ $row->no_referensi }}</td>
+                                        <td>{{ $row->keluhan }}</td>
+                                        <td>{{ $row->created_at }}</td>
                                         <td class="ps-5">
-                                            
+                                            {{ $row->file != null ? Laporan::STATUS[$row->status] : 'Menunggu Upload File' }}
                                         </td>
                                         <td class="text-center">
-                                            <a href="#"
+                                            <a href="{{ route('lapor.show', ['id' => $row->id]) }}"
                                                 class="btn btn-primary-2">Detail</a>
                                         </td>
                                     </tr>
+                                @endforeach
                                 <tr class="border-bottom d-none data-null">
                                     <td colspan="5" class="text-center">
                                         Laporan Tidak Ditemukan!
                                     </td>
                                 </tr>
+                                @if (count($laporan) < 1)
                                     <tr class="border-bottom">
                                         <td colspan="5" class="text-center">
                                             Laporan Tidak Ditemukan!
                                         </td>
                                     </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>

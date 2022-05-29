@@ -42,4 +42,17 @@
                 </div>
             </div>
         </div>
-
+        <div class="container mb-5 pb-5">
+            <div class="text-start">
+                <h3>{{ $fasilitas->name }}</h3>
+                <h5>Alamat : {{ $fasilitas->alamat }}</h5>
+                <h5>Buka Pukul : {{ $fasilitas->buka }}</h5>
+            </div>
+        </div>
+    </div>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        // $('.card').css('background-color', 'transparent')
+    </script>
+@endsection

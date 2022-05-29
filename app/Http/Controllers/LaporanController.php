@@ -68,6 +68,9 @@ class LaporanController extends Controller
                 'lokasi' => $request->lokasi,
                 'keluhan' => $request->keluhan,
                 'tipe' => $request->tipe,
+                'tanggal_kejadian' => isset($request->tanggal_kejadian) ?  $request->tanggal_kejadian : null,
+                'waktu_kejadian' => isset($request->waktu_kejadian) ?  $request->waktu_kejadian : null,
+                'oknum' => isset($request->oknum) ?  $request->oknum : null,
                 'status' => 0,
             ]);
 

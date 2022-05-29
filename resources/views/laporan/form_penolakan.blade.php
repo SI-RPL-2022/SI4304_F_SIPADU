@@ -33,4 +33,43 @@
     </div>
 @endsection
 @section('script')
+<script type="text/javascript">
+        $('.verifikasiButton').on('click', function() {
+            let alasan = $('#alasan').val()
+            if (alasan == '') {
+                Swal.fire({
+                    title: 'Warning',
+                    text: "Harap isi alasan menolak!",
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                })
 
+                return
+            }
+
+            let form = $('#formPenolakan')
+            Swal.fire({
+                title: 'Apa Anda Yakin?',
+                text: "Laporan Akan Ditolak!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Tolak',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Tunggu Sebentar...',
+                        html: 'Sedang memproses laporan...',
+                        didOpen: () => {
+                            Swal.showLoading()
+                        }
+                    })
+                    form.submit()
+                }
+            })
+        })
+    </script>
+@endsection

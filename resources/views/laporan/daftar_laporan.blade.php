@@ -30,6 +30,9 @@ use App\Models\Laporan;
                                     <th class="pb-4">Waktu Laporan</th>
                                     <th class="pb-4 text-start ps-5">Status</th>
                                     <th class="pb-4">Aksi</th>
+                                    @if (Auth::user()->role == 'superadmin')
+                                        <th class="pb-4">Feedback</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody class="text-primary-2 body-laporan">
@@ -39,12 +42,21 @@ use App\Models\Laporan;
                                         <td>{{ $row->keluhan }}</td>
                                         <td>{{ $row->created_at }}</td>
                                         <td class="ps-5">
-                                            {{ $row->file != null ? Laporan::STATUS[$row->status] : 'Menunggu Upload File' }}
+                                            {{ $row->file == null && $row->tipe != 3 ? 'Menunggu Upload File' : Laporan::STATUS[$row->status] }}
                                         </td>
                                         <td class="text-center">
-                                            <a href="{{ route('lapor.show', ['id' => $row->id]) }}"
-                                                class="btn btn-primary-2">Detail</a>
+                                            @if (Auth::user()->role == 'petugas')
+                                                <a href="{{ route('lapor.show', ['id' => $row->id]) }}"
+                                                    class="btn btn-success rounded-pill border-0 px-5"
+                                                    style="background-color: #32C825">Detail</a>
+                                            @else
+                                                <a href="{{ route('lapor.show', ['id' => $row->id]) }}"
+                                                    class="btn btn-primary-2">Detail</a>
+                                            @endif
                                         </td>
+                                        @if (Auth::user()->role == 'superadmin')
+                                            <td>{{ isset($row->Feedback) ? $row->Feedback->pesan : '-' }}</td>
+                                        @endif
                                     </tr>
                                 @endforeach
                                 <tr class="border-bottom d-none data-null">

@@ -1,7 +1,4 @@
 @extends('layouts.app')
-@php
-use App\Models\Laporan;
-@endphp
 @section('content')
     <div class="container pb-5">
         <div class="d-flex justify-content-between">
@@ -25,17 +22,6 @@ use App\Models\Laporan;
                                 <th width="10px"><b>:</b></th>
                                 <td>
                                     {{ $laporan->no_referensi }}
-                                </td>
-                            </tr>
-                            <tr class="text-primary-2 text-start" style="vertical-align: bottom;">
-                                <th width="200px">
-                                    <h4 class="pb-0 mb-0">
-                                        <b>Status Laporan</b>
-                                    </h4>
-                                </th>
-                                <th width="10px"><b>:</b></th>
-                                <td>
-                                    {{ Laporan::STATUS[$laporan->status] }}
                                 </td>
                             </tr>
                             <tr class="text-primary-2 text-start" style="vertical-align: bottom;">
@@ -82,6 +68,41 @@ use App\Models\Laporan;
                                     {{ $laporan->created_at }}
                                 </td>
                             </tr>
+                            @if ($laporan->tipe == 2)
+                                <tr class="text-primary-2 text-start" style="vertical-align: bottom;">
+                                    <th width="200px">
+                                        <h4 class="pb-0 mb-0">
+                                            <b>Tanggal Kejadian</b>
+                                        </h4>
+                                    </th>
+                                    <th width="10px"><b>:</b></th>
+                                    <td>
+                                        {{ $laporan->tanggal_kejadian }}
+                                    </td>
+                                </tr>
+                                <tr class="text-primary-2 text-start" style="vertical-align: bottom;">
+                                    <th width="200px">
+                                        <h4 class="pb-0 mb-0">
+                                            <b>Waktu Kejadian</b>
+                                        </h4>
+                                    </th>
+                                    <th width="10px"><b>:</b></th>
+                                    <td>
+                                        {{ $laporan->waktu_kejadian }}
+                                    </td>
+                                </tr>
+                                <tr class="text-primary-2 text-start" style="vertical-align: bottom;">
+                                    <th width="200px">
+                                        <h4 class="pb-0 mb-0">
+                                            <b>Nama Oknum</b>
+                                        </h4>
+                                    </th>
+                                    <th width="10px"><b>:</b></th>
+                                    <td>
+                                        {{ $laporan->oknum != null ? $laporan->oknum : '-' }}
+                                    </td>
+                                </tr>
+                            @endif
                             <tr class="text-primary-2 text-start" style="vertical-align: top;">
                                 <th width="200px">
                                     <h4 class="pb-0 mb-0">
@@ -112,16 +133,82 @@ use App\Models\Laporan;
                         </table>
                     </div>
                     <div class="d-flex justify-content-end">
-                        @if (Auth::user()->id == $laporan->id_user && $laporan->status == 1)
-                            <button class="btn btn-primary-2 me-3 feedbackButton" data-status="false">Feedback</button>
+                        @if (Auth::user()->id == $laporan->id_user && $laporan->status == 2 && $laporan->feedback == null)
+                            <a href="{{ route('feedback.show', ['id' => $laporan->id]) }}" class="btn btn-primary-2 me-3"
+                                data-status="false">Feedback</a>
                         @endif
-                        @if (Auth::user()->role != 'user')
+                        @if (Auth::user()->role == 'superadmin' && $laporan->status == 0)
                             <button class="btn btn-primary-2 me-3 verifikasiButton">Verifikasi Laporan</button>
                             <button class="btn btn-danger-2 tolakButton">Tolak Laporan</button>
+                        @elseif (Auth::user()->role == 'petugas' && $laporan->status == 1)
+                            <a href="{{ route('input.laporan', ['id' => $laporan->id]) }}"
+                                class="btn btn-primary-2 me-3">Input Laporan</a>
                         @endif
                     </div>
                 </div>
             </div>
+
+            @if (Auth::user()->role == 'superadmin' && isset($laporan->Petugas))
+                <div class="card py-4 mt-3">
+                    <h2 class="text-primary-2 text-center">Penanganan Oleh Teknisi</h2>
+                    <div class="card-body">
+                        <div class="table-responsive scrollbar-custom">
+                            <table class="table table-borderless">
+                                <tr class="text-primary-2 text-start" style="vertical-align: bottom;">
+                                    <th width="200px">
+                                        <h4 class="pb-0 mb-0">
+                                            <b>Nama Petugas</b>
+                                        </h4>
+                                    </th>
+                                    <th width="10px"><b>:</b></th>
+                                    <td>
+                                        {{ $laporan->Petugas->User->name }}
+                                    </td>
+                                </tr>
+                                <tr class="text-primary-2 text-start" style="vertical-align: bottom;">
+                                    <th width="200px">
+                                        <h4 class="pb-0 mb-0">
+                                            <b>Metode Penanganan</b>
+                                        </h4>
+                                    </th>
+                                    <th width="10px"><b>:</b></th>
+                                    <td>
+                                        {{ $laporan->Petugas->metode }}
+                                    </td>
+                                </tr>
+                                <tr class="text-primary-2 text-start" style="vertical-align: top;">
+                                    <th width="200px">
+                                        <h4 class="pb-0 mb-0">
+                                            <b>Bukti Laporan</b>
+                                        </h4>
+                                    </th>
+                                    <th width="10px"><b>:</b></th>
+                                    <td>
+                                        @if ($laporan->Petugas->image == null)
+                                            @if ($laporan->tipe == 1)
+                                                <a href="{{ route('lapor.keluhan.upload.fasilitas.rusak', ['id' => $laporan->id]) }}"
+                                                    class="btn btn-warning-2">Upload File</a>
+                                            @endif
+                                        @else
+                                            @if (Str::contains($laporan->Petugas->image, 'mp4'))
+                                                <video width="75%" height="auto" controls>
+                                                    <source src="{{ asset('keluhan') . '/' . $laporan->Petugas->image }}"
+                                                        type="video/mp4">
+                                                    <source src="movie.ogg" type="video/ogg">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            @else
+                                                <img src="{{ asset('keluhan') . '/' . $laporan->Petugas->image }}"
+                                                    width="75%" alt="">
+                                            @endif
+                                        @endif
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             <div id="form-feedback" class="d-none card pt-3 pb-3 mt-3">
                 <form action="{{ route('feedback.store') }}" method="post">

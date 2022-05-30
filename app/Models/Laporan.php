@@ -22,11 +22,15 @@ class Laporan extends Model
         'tipe',
         'status',
         'alasan_penolakan',
+        'waktu_kejadian',
+        'tanggal_kejadian',
+        'oknum'
     ];
 
     const STATUS = [
-        '0' => 'Menunggu Tanggapan',
-        '1' => 'Diterima',
+        '0' => 'Diterima',
+        '1' => 'Sedang Diproses',
+        '2' => 'Selesai',
         '99' => 'Ditolak'
     ];
 }

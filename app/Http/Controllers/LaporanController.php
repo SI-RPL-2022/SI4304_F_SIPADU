@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 class LaporanController extends Controller
@@ -113,15 +114,32 @@ class LaporanController extends Controller
             } else if ($request->tipe == 2) {
                 return redirect()->to(route('lapor.keluhan.upload.oknum', ['id' => $laporan->id]));
             } else if ($request->tipe == 3) {
-                return redirect()->to(route('lapor.keluhan.upload.saran', ['id' => $laporan->id]));
+                $request->session()->flash('noRef', $laporan->no_referensi);
+
+                return redirect()->to(url('lapor/keluhan/saran/done'));
             }
             return redirect()->to(route('lapor.keluhan'));
         } catch (\Exception $e) {
             throw $e;
         }
     }
-    public function feedback(Request $request)
+    public function feedback(Request $request, $id = 0)
     {
+        if (!isset($request->id_laporan)) {
+            $laporan = Laporan::where('id', $id)
+                ->with(['Petugas' => function ($query) {
+                    $query->with('User');
+                }])->first();
+            // dd($laporan);
+
+            if ($laporan == null) abort(404);
+
+            $data = [
+                'title' => 'Feedback Layanan SIPADU',
+                'laporan' => $laporan
+            ];
+            return view('laporan.feedback', $data);
+        }
         DB::beginTransaction();
         try {
             $feedback = new Feedback();
@@ -212,7 +230,7 @@ class LaporanController extends Controller
             $request->session()->flash('noRef', $laporan->no_referensi);
             DB::commit();
 
-            return redirect()->to(route('lapor.keluhan.saran.done'));
+            return redirect()->to(url('lapor/keluhan/saran/done'));
         } catch (\Exception $e) {
             throw $e;
         }
@@ -224,6 +242,12 @@ class LaporanController extends Controller
 
         if (Auth::user()->role == 'user') {
             $laporan->where('id_user', Auth::user()->id);
+        } else if (Auth::user()->role == 'petugas') {
+            $laporan->whereHas('Petugas', function ($query) {
+                $query->where('id_user', Auth::user()->id);
+            });
+        } else if (Auth::user()->role == 'superadmin') {
+            $laporan->with('Feedback');
         }
 
         $data = [
@@ -262,11 +286,13 @@ class LaporanController extends Controller
         }
         $lapor->save();
 
-        $assign = new AssignPetugas();
-        $assign->id_user = $request->petugas;
-        $assign->id_laporan = $id;
-        $assign->description = $request->description;
-        $assign->save();
+        if (isset($request->petugas)) {
+            $assign = new AssignPetugas();
+            $assign->id_user = $request->petugas;
+            $assign->id_laporan = $id;
+            $assign->description = $request->description;
+            $assign->save();
+        }
 
         return view('laporan.lapor_berhasil', $data);
     }
@@ -279,7 +305,10 @@ class LaporanController extends Controller
      */
     public function show($id)
     {
-        $laporan = Laporan::find($id);
+        $laporan = Laporan::where('id', $id)
+            ->with(['Petugas' => function ($query) {
+                $query->with('User');
+            }])->first();
 
         if ($laporan == null) abort(404);
 
@@ -288,7 +317,37 @@ class LaporanController extends Controller
             'laporan' => $laporan
         ];
 
+        if (Str::contains(URL::current(), 'petugas')) {
+            return view('laporan.input_laporan_petugas', $data);
+        }
         return view('laporan.detail_laporan', $data);
+    }
+
+    public function inputLaporan(Request $request, $id)
+    {
+        $laporan = Laporan::find($id);
+        $assign = AssignPetugas::where('id_laporan', $id)->first();
+        $assign->metode = $request->metode;
+        if ($request->hasFile('file')) {
+            $format = $request->file('file')->getClientOriginalName();
+            $name = Str::random(7);
+            $newName = 'petugas_' . $name . $format;
+            $request->file('file')->move(public_path() . '/keluhan', $newName);
+
+            $assign->image = $newName;
+            $assign->save();
+        } else {
+            $request->session()->flash('alert', 'warning');
+            $request->session()->flash('message', 'Harap Upload File Terlebih Dahulu!');
+            return redirect()->back();
+        }
+
+        $laporan->status = 2;
+        $laporan->save();
+
+        $request->session()->flash('noRef', $laporan->no_referensi);
+
+        return redirect()->to(url('lapor/petugas/done'));
     }
 
     /**

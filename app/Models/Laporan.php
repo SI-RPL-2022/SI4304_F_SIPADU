@@ -38,4 +38,9 @@ class Laporan extends Model
     {
         return $this->hasOne('App\Models\AssignPetugas', 'id_laporan', 'id');
     }
+
+    public function Feedback()
+    {
+        return $this->hasOne('App\Models\Feedback', 'id_laporan', 'id');
+    }
 }

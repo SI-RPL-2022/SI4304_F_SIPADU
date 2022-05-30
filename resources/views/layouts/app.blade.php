@@ -28,27 +28,48 @@
                     <li class="nav-item pe-3">
                         <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Informasi
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('fasilitas.index') }}">Infrastruktur
-                                    Publik</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Laporan
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('lapor.keluhan') }}">Lapor Keluhan</a></li>
-                            <li><a class="dropdown-item" href="{{ route('lapor.list') }}">Status Laporan</a></li>
-                        </ul>
-                    </li>
+                    @if (Auth::user()->role != 'petugas')
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Informasi
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('fasilitas.index') }}">Infrastruktur
+                                        Publik</a>
+                                </li>
+                                {{-- <li><a class="dropdown-item" href="">Berita</a></li> --}}
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Laporan
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @if (Auth::user()->role == 'user')
+                                    <li><a class="dropdown-item" href="{{ route('lapor.keluhan') }}">Lapor
+                                            Keluhan</a>
+                                    </li>
+                                <li><a class="dropdown-item" href="{{ route('lapor.list') }}">Status Laporan</a></li>
+                                @else
+                                <li><a class="dropdown-item" href="{{ route('lapor.list') }}">Daftar Laporan</a></li>
+                                @endif
+                                <li><a class="dropdown-item" href="{{ route('lapor.list') }}">Status Laporan</a></li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Laporan
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('lapor.list') }}">Daftar Laporan</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">

@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="py-4 bg-white mt-5">
+    {{-- <div class="py-4 bg-white mt-5">
         <div class="container pb-5">
             <div>
                 <h3 class="text-primary-2 title-news">
@@ -40,5 +40,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

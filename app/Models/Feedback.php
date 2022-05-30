@@ -11,4 +11,9 @@ class Feedback extends Model
     protected $table = 'feedback';
     public $incrementing = true;
     public $timestamps = true;
+
+    public function User()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'id_user');
+    }
 }

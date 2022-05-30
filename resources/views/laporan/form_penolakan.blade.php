@@ -5,7 +5,7 @@
             <h2 class="text-primary-2">
                 <b>ALASAN PENOLAKAN LAPORAN</b>
             </h2>
-            <a href="#" class="text-primary-2"
+            <a href="{{ route('lapor.show', ['id' => $id]) }}" class="text-primary-2"
                 style="font-size: 1.3em; text-decoration: none; vertical-align: bottom;">Kembali</a>
         </div>
         <div class="row">
@@ -33,7 +33,7 @@
     </div>
 @endsection
 @section('script')
-<script type="text/javascript">
+    <script type="text/javascript">
         $('.verifikasiButton').on('click', function() {
             let alasan = $('#alasan').val()
             if (alasan == '') {

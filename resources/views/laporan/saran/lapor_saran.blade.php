@@ -29,9 +29,9 @@
                 <div id="step-1" class="card-register mx-auto">
                     <div class="card shadow-sm border-0 pt-3 pb-3" style="border-radius: 35px;">
                         <div class="card-body text-center">
-                            <div class="border-bottom mx-4 pb-3">
+                            {{-- <div class="border-bottom mx-4 pb-3">
                                 <img src="{{ asset('images/step-1.svg') }}" width="100%" alt="">
-                            </div>
+                            </div> --}}
                             <div class="py-3 text-start px-4">
                                 <div class="form-group mb-4">
                                     <label class="mb-2 ms-3"><b>Nama Tempat/Fasilitas</b></label>
@@ -46,16 +46,14 @@
                                         placeholder="Tuliskan Lokasinya" required>
                                 </div>
                                 <div class="form-group mb-4">
-                                    <label class="mb-2 ms-3"><b>Detail Saran</b></label>
-                                    <textarea id="text" name="keluhan" cols="30" rows="10" class="form-control border-0" style="background-color: #F7F8FA"
-                                        required></textarea>
+                                    <label class="mb-2 ms-3"><b>Detail Keluhan/Saran</b></label>
+                                    <textarea type="text" name="keluhan" class="form-control py-2 px-3 border-0"
+                                        style="box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);" rows="10"
+                                        placeholder="Detail Keluhan" required> </textarea>
                                 </div>
-
-
-
                             </div>
                         </div>
-                        </div>
+                    </div>
                     <div class="d-flex justify-content-end mt-3">
                         <button class="btn btn-primary-2 next-step">Selanjutnya</button>
                     </div>

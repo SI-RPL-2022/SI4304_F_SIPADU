@@ -6,7 +6,7 @@
         </div>
         <div class="card-register mx-auto">
 
-        <div class="card shadow-sm border-0 pt-3 pb-3" style="border-radius: 35px;">
+            <div class="card shadow-sm border-0 pt-3 pb-3" style="border-radius: 35px;">
                 <div class="card-body text-center">
                     <div class="py-5 text-center px-4">
                         <img src="{{ asset('images/success.svg') }}" class="my-3" alt="">

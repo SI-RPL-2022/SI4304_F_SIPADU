@@ -58,10 +58,11 @@ Route::prefix('lapor')->group(function () {
 
     Route::post('keluhan/saran/{id}/upload', [LaporanController::class, 'uploadSaran'])->name('lapor.keluhan.upload.saran');
     Route::get('keluhan/saran/done', function () {
-        $data['title'] = 'Keluhan/Saran Terkait Fasilitas';
+        $data['title'] = 'Keluhan/Saran Terkait Fasilitass';
         return view('laporan.saran.lapor_saran_done', $data);
     })->name('lapor.keluhan.saran.done');
 
+    Route::get('feedback/{id}', [LaporanController::class, 'feedback'])->name('feedback.show');
     Route::post('feedback', [LaporanController::class, 'feedback'])->name('feedback.store');
     Route::get('keluhan/saran/done', function () {
         $data['title'] = 'Feedback Berhasil';
@@ -70,6 +71,13 @@ Route::prefix('lapor')->group(function () {
 
 
     Route::post('keluhan/save}', [LaporanController::class, 'store'])->name('lapor.keluhan.save');
+
+    Route::get('petugas/done', function () {
+        $data['title'] = 'Feedback Berhasil';
+        return view('laporan.input_laporan_petugas_done', $data);
+    })->name('input.laporan.done');
+    Route::get('petugas/{id}', [LaporanController::class, 'show'])->name('input.laporan');
+    Route::post('petugas/{id}', [LaporanController::class, 'inputLaporan'])->name('input.laporan.store');
 
     // Verifikasi
     Route::post('verifikasi/{id}', [LaporanController::class, 'verifikasi'])->name('lapor.verifikasi');

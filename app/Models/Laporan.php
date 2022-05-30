@@ -33,4 +33,9 @@ class Laporan extends Model
         '2' => 'Selesai',
         '99' => 'Ditolak'
     ];
+
+    public function Petugas()
+    {
+        return $this->hasOne('App\Models\AssignPetugas', 'id_laporan', 'id');
+    }
 }

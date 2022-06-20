@@ -20,6 +20,9 @@
                                 <select name="fasilitas" id="fasilitas" class="form-control py-2 px-3 rounded-pill border-0"
                                     style="box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);" required>
                                     <option value="">Pilih Fasilitas</option>
+                                    @foreach($fasilitas as $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                    @endforeach
                                     <option value="Lainnya">Lainnya</option>
                                 </select>
                             </div>

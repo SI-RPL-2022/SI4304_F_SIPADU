@@ -34,11 +34,16 @@
                             </div> --}}
                             <div class="py-3 text-start px-4">
                                 <div class="form-group mb-4">
-                                    <label class="mb-2 ms-3"><b>Nama Tempat/Fasilitas</b></label>
-                                    <input type="text" name="fasilitas" class="form-control py-2 px-3 rounded-pill border-0"
-                                        style="box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);" placeholder="Detail fasilitas"
-                                        required>
-                                </div>
+                                <label class="mb-2 ms-3"><b>Pilih Fasilitas</b></label>
+                                <select name="fasilitas" id="fasilitas" class="form-control py-2 px-3 rounded-pill border-0"
+                                    style="box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);" required>
+                                    <option value="">Pilih Fasilitas</option>
+                                    @foreach($fasilitas as $item)
+                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                    @endforeach
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
                                 <div class="form-group mb-4">
                                     <label class="mb-2 ms-3"><b>Lokasi</b></label>
                                     <input type="text" name="lokasi" class="form-control py-2 px-3 rounded-pill border-0"

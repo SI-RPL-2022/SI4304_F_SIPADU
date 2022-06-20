@@ -8,6 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <link rel="icon" href="{{ url('css/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}">
     <title>{{ $title }} | SIPADU</title>
@@ -38,7 +39,14 @@
                                 <li><a class="dropdown-item" href="{{ route('fasilitas.index') }}">Infrastruktur
                                         Publik</a>
                                 </li>
-                                {{-- <li><a class="dropdown-item" href="">Berita</a></li> --}}
+                                <li><a class="dropdown-item" href="{{ route('berita.index') }}">Berita</a>
+                                </li>
+                                @if (Auth::user()->role == 'superadmin')
+                                    <li><a class="dropdown-item" href="{{ route('berita.create') }}">Buat Berita</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('fasilitas.create') }}">Buat
+                                            Fasilitas</a></li>
+                                @endif
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -51,11 +59,12 @@
                                     <li><a class="dropdown-item" href="{{ route('lapor.keluhan') }}">Lapor
                                             Keluhan</a>
                                     </li>
-                                <li><a class="dropdown-item" href="{{ route('lapor.list') }}">Status Laporan</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('lapor.list') }}">Status Laporan</a>
+                                    </li>
                                 @else
-                                <li><a class="dropdown-item" href="{{ route('lapor.list') }}">Daftar Laporan</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('lapor.list') }}">Daftar Laporan</a>
+                                    </li>
                                 @endif
-                                <li><a class="dropdown-item" href="{{ route('lapor.list') }}">Status Laporan</a></li>
                             </ul>
                         </li>
                     @else

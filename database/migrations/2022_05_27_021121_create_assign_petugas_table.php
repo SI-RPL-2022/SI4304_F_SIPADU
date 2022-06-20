@@ -17,9 +17,9 @@ class CreateAssignPetugasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_laporan');
-            $table->text('description');
-            $table->text('metode');
-            $table->text('image');
+            $table->text('description')->nullable();
+            $table->text('metode')->nullable();
+            $table->text('image')->nullable();
             $table->timestamps();
 
 

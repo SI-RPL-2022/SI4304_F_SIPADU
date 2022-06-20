@@ -14,7 +14,8 @@
                 <div class="col-md-4 p-0">
                     <div class="card p-0 w-auto border-0 card-fasilitas" style="background-color: transparent">
                         <div class="card-body p-0">
-                            <img src="{{ asset('images/fasilitas' . "/$item->image") }}" class="w-100" alt="">
+                            <img src="{{ asset('/fasilitas_file' . "/$item->image") }}" height="280" class="w-100"
+                                alt="">
                         </div>
                         <div class="title-fasilitas" style="z-index: 9999">
                             <h3 class="text-primary-2 text-center">{{ $item->name }}</h3>

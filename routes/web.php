@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaporanController;
@@ -22,6 +23,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::prefix('sicepat')->group(function () {
+    Route::get('/', [HomeController::class, 'indexSicepat']);
+    Route::get('/api/statuspengiriman', [HomeController::class, 'CheckStatusPaket']);
+
+    Route::get('/api/get-orderan', [HomeController::class, 'GetOrderan']);
+    Route::post('/api/tambah-orderan', [HomeController::class, 'TambahOrderan']);
+    Route::delete('/api/hapus-orderan', [HomeController::class, 'HapusOrderan']);
+});
+
 Route::get('/register/done', function () {
     return view('auth.register_done');
 });
@@ -32,10 +42,14 @@ Route::get('profil', [HomeController::class, 'profil'])->name('profil');
 Route::get('profil/edit', [HomeController::class, 'profil'])->name('profil.edit');
 Route::post('profil/edit/submit', [HomeController::class, 'profil'])->name('profil.submit');
 
+
+Route::resource('fasilitas', FasilitasController::class)->except(['index', 'show']);
 Route::prefix('fasilitas')->group(function () {
     Route::get('', [FasilitasController::class, 'index'])->name('fasilitas.index');
     Route::get('{id}', [FasilitasController::class, 'show'])->name('fasilitas.show');
 });
+
+Route::resource('berita', BeritaController::class);
 
 // Lapor Keluhan
 Route::prefix('lapor')->group(function () {

@@ -88,7 +88,15 @@ body {
     content: '',
     display: block;
     height: auto;
-    width: 180px;
+    width: 260px;
+    border-top: 7px solid #FFE69E
+}
+
+.title-news-2 {
+    content: '',
+    display: block;
+    height: auto;
+    width: 260px;
     border-bottom: 7px solid #FFE69E
 }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AssignPetugas;
 use App\Models\Feedback;
 use App\Models\Laporan;
+use App\Models\Fasilitas;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -31,10 +32,12 @@ class LaporanController extends Controller
 
     public function laporKeluhan(Request $request, $type, $id = null)
     {
+        $data['fasilitas'] = Fasilitas::all();
 
         if ($type == 'fasilitas-rusak') {
             $data = [
-                'title' => 'Lapor Fasilitas Rusak'
+                'title' => 'Lapor Fasilitas Rusak',
+                'fasilitas' => Fasilitas::all()
             ];
 
             if ($id != null) {
@@ -49,7 +52,8 @@ class LaporanController extends Controller
             return view('laporan.lapor_fasilitas_rusak', $data);
         } else if ($type == 'oknum') {
             $data = [
-                'title' => 'Lapor Oknum Perusak Fasilitas'
+                'title' => 'Lapor Oknum Perusak Fasilitas',
+                'fasilitas' => Fasilitas::all()
             ];
 
             if ($id != null) {
@@ -64,7 +68,8 @@ class LaporanController extends Controller
             return view('laporan.oknum.lapor_oknum', $data);
         } elseif ($type == 'saran') {
             $data = [
-                'title' => 'Keluhan/Saran Terkait Fasilitas'
+                'title' => 'Keluhan/Saran Terkait Fasilitas',
+                'fasilitas' => Fasilitas::all()
             ];
 
             if ($id != null) {

@@ -63,17 +63,7 @@ class BeritaController extends Controller
                 $request->file('file')->move(public_path() . '/berita_file', $newName);
 
                 $berita->image = $newName;
-            } else {
-                $request->session()->flash('alert', 'warning');
-                $request->session()->flash('message', 'Harap Upload File Terlebih Dahulu!');
-                return redirect()->to(route('berita.create'));
-            }
-            $berita->save();
-
-            $request->session()->flash('alert', 'success');
-            $request->session()->flash('message', 'Berita Berhasil Ditambahkan!');
-            return redirect()->to(route('berita.create'));
-        } catch (\Exception $err) {
+                
             throw $err;
         }
     }
